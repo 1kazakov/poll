@@ -10,7 +10,6 @@ class NewPoll extends Component {
     }
 
     render() {
-        console.log('this.props', this.props)
         return (
             // <div className="card-list__item card new-poll" onClick={this.props.onShowPopupNewPoll('block')}>
             // <div className="card-list__item card new-poll" onClick={this.props.onShowPopupNewPoll(true)}>

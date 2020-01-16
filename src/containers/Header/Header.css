@@ -44,26 +44,4 @@
     border-radius: 50%;
     background-color: red;
 }
-.header__bottom {
-    position:absolute;
-    width: 100%;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-}
-.header__nav {
-    display: flex;
-}
-.nav__link {
-    text-decoration: none;
-    margin: 0 12px;
-    padding-bottom: 10px;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    color: #9E9E9E;
-}
-.nav__link--active {
-    color: #212121;
-    border-bottom: 2px solid  #1F84DB ;
-}
+
