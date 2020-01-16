@@ -1,0 +1,45 @@
+.card__actions-list {
+    position: absolute;
+    top: 131px;
+    left: 225px;
+    margin: 0;
+    z-index: 10;
+    padding: 20px 20px 20px 52px;
+    list-style: none;
+    box-sizing: border-box;
+    width: 320px;
+    height: 152px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card__actions-list:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+.card__action {
+    position: relative;
+    font-size: 16px;
+    line-height: 24px;
+}
+.card__action:hover {
+    text-decoration: underline;
+}
+.card__action:before {
+    content: "";
+    position: absolute;
+    left: -35px;
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+}
+.rename:before {
+    background-image: url(../../img/rename.svg);
+}
+.delete:before {
+    background-image: url(../../img/delete.svg);
+}
+.open:before {
+    background-image: url(../../img/open.svg);
+}

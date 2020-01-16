@@ -1,0 +1,18 @@
+.new-poll__icon {
+    width: 80px;
+    height: 80px;
+    margin: 4px auto 0;
+    border-radius: 50%;
+    background-image: url(../../img/plus.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-color: #F4F3F3;
+}
+.new-poll__title {
+    /* margin-top: 25px; */
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #1F84DB;
+}

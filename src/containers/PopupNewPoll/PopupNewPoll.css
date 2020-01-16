@@ -1,0 +1,45 @@
+.popup-new-poll {
+    position: absolute;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    background-color: #ffffff;
+    border-radius: 6px;
+    z-index: 100;
+}
+.popup-new-poll__form {
+    display: flex;
+    flex-direction: column;
+}
+.popup-new-poll__wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.popup-new-poll__title {
+    align-self: center;
+    font-size: 20px;
+}
+.popup-new-poll__input {
+    border-radius: 4px;
+    border: 1px solid #E0E0E0;
+    font-size: inherit;
+    font-family: inherit;
+    padding: 5px;
+    margin: 15px;
+}
+.popup-new-poll__button {
+    align-self: center;
+}
+.overlay {
+    position: fixed;
+    z-index: 50;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #000000;
+    opacity: 0.55;
+}

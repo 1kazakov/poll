@@ -1,0 +1,39 @@
+.Page1{
+    font-family: 'Open Sans', sans-serif;
+}
+.button {
+    box-sizing: border-box;
+    height: 40px;
+    border: none;
+    padding: 0 20px;
+    background-color: #1F84DB;
+    border-radius: 20px;
+    color: #ffffff;
+}
+/* .main {
+    background:#addaed;
+} */
+.main__card-list {
+    padding: 35px 100px;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-around; */
+}
+
+.card {
+    box-sizing: border-box;
+    margin: 15px;
+    padding: 20px;
+    width: 261px;
+    height: 161px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    position: relative;
+    cursor: pointer;
+}
+.card:hover {
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
