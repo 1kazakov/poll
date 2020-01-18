@@ -1,0 +1,21 @@
+.element {
+    padding: 0;
+    margin: 20px 0;
+    border: none;
+    border-bottom: 1px solid #E0E0E0;;
+}
+.element__wrapper {
+    display: flex;
+}
+.element__select {
+    box-sizing: border-box;
+    padding: 5px;
+    margin: 0;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+}
+.element__toggle{
+    margin: 0 0 0 auto;
+}

@@ -1,0 +1,37 @@
+.radio {
+    margin: 20px 0;
+}
+.radio__text {
+    font-size: 14px;
+    line-height: 20px;
+}
+.buttom--text {
+    background-color: #ffffff;
+    border: none;
+    padding: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #1F84DB;
+    font-family: inherit;
+}
+.radio__input {
+    display: block;
+    box-sizing: border-box;
+    width: 641px;
+    margin: 10px 39px 10px 26px;
+}
+.radio__input-wrapper{
+    position: relative;
+
+}
+.radio__input-wrapper:before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: 5px;
+    background-image: url(../../../img/circle.svg);
+    z-index: 100;
+}

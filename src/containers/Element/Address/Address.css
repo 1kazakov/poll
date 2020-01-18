@@ -1,0 +1,10 @@
+.address {
+    margin: 20px 0 ;
+}
+.address__input {
+    font-size: 14px;
+}
+.input__text {
+    font-size: 14px;
+    line-height: 20px;
+}
