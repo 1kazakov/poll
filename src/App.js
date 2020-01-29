@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Page1 from './containers/Page1';
 
@@ -7,7 +7,7 @@ import Page1 from './containers/Page1';
 
 
 
-class App extends React.Component {
+class App extends Component {
   render() {
     return (
       <Switch>

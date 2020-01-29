@@ -20,7 +20,7 @@ class Nav extends Component {
             polls: { name: 'Опросы', style: {} },
             results: { name: 'Результаты', style: {} },
             entry: { name: 'Точка входа', style: {} },
-            sections: { name: 'Разделы', style: {} },
+            constructor: { name: 'Разделы', style: {} },
             end: { name: 'Завершение', style: {} },
         }
         let linksArr = [];

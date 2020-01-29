@@ -1,0 +1,22 @@
+.pull-constructor__controls {
+    left: calc(50% + 400px);
+    position: fixed;
+    height: 152px;
+    width: 64px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 22px 18px;
+}
+
+.pull-constructor__button-add {
+    height: 24px;
+    width: 24px;
+    border: none;
+    background: #ffffff;
+    background-image: url(../../img/add.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+}

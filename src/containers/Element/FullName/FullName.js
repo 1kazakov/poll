@@ -3,6 +3,7 @@ import './FullName.css';
 
 class FullName extends Component {
     render() {
+        console.log('FullName', this.props.index)
         return (
             <div className="full-name">
                 <label className="full-name__input__label input__label" >

@@ -35,3 +35,14 @@
     background-image: url(../../../img/circle.svg);
     z-index: 100;
 }
+.radio__button--del {
+    position: absolute;
+    top: 7px;
+    right: 5px;
+    width: 16px;
+    height: 16px;
+    border: none;
+    background-color: #ffffff;
+    background-image: url(../../../img/cross.svg);
+    background-size: cover;
+}
