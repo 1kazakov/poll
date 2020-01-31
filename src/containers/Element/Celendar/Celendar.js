@@ -5,7 +5,7 @@ class Celendar extends Component {
     render() {
         return (
             <div>
-
+                <input type="date" />
             </div>
         )
     }

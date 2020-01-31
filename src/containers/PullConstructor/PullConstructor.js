@@ -16,9 +16,12 @@ class PullConstructor extends Component {
         evt.preventDefault()
         let section = this.state.section
         const index = Object.keys(section).length + 1;
+        console.log('index', index)
+        // let index = Object.keys(section).length + 1;
+        // index = String(index) + 1;
         section[index] = { section: <Sections key={index} index={index} /> };
         this.setState({ section: section });
-        this.props.dispatch(elementActions.addSection({ index: index, title: '', subtitle: '' }))
+        this.props.dispatch(elementActions.addSection([{ index: index, title: '', subtitle: '' }, { elementIndex: String(index) + 1, name: 'fullName' }]))
     }
     render() {
         const { section } = this.state;
@@ -31,7 +34,7 @@ class PullConstructor extends Component {
                 <div className="pull-constructor__controls">
                     <button className="pull-constructor__button-add" onClick={this.addSection}></button>
                 </div>
-                <Sections index={0} />
+                <Sections key={0} index={0} />
                 {out}
             </div>
         )
