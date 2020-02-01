@@ -53,7 +53,7 @@ class Radio extends Component {
         }
         radio = radio.concat({ value: '', index: index })
         inputs = inputs.concat({
-            input: <div className="radio__input-wrapper" key={index}><input type="text" name={index} className="input radio__input" placeholder="Введите вариант ответа" onChange={this.setOptionRadio} value={this.state.radio[index]} /> <button name={index} className="radio__button--del" onClick={this.deleteInput}></button></div>,
+            input: <div className="radio__input-wrapper" key={index}><input type="text" name={index} className="input radio__input" placeholder="Введите вариант ответа" onChange={this.setOptionRadio} value={this.state.radio[index]} /> <button name={index} className="button--del" onClick={this.deleteInput}></button></div>,
             index: index,
         });
         inputs.sort((a, b) => {

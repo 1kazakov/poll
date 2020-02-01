@@ -4,6 +4,7 @@ import './Element.css';
 
 import FullName from './FullName/FullName';
 import Radio from './Radio/Radio';
+import FotoRadio from './FotoRadio/FotoRadio';
 
 import * as elementActions from '../../store/elements/actions';
 
@@ -23,7 +24,7 @@ class Element extends Component {
         this.option.set('textArea', { out: null });
         this.option.set('radio', { out: <Radio index={this.props.index} /> });
         this.option.set('checkbox', { out: <Radio index={this.props.index} /> });
-        // option.set(fotoRadio, )
+        this.option.set('fotoRadio', { out: <FotoRadio index={this.props.index} /> });
         // option.set(fotoCheckbox, )
         // option.set(scale, )
     }

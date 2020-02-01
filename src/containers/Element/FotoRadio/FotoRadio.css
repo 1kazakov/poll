@@ -1,0 +1,25 @@
+.foto-radio__wrapper {
+    display: flex;
+}
+.foto-radio__file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.foto-radio__label-file {
+    margin: 0 15px;
+    width: 24px;
+    height: 24px;
+    background-image: url(../../../img/addimg.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.foto-radio__button--del {
+    position: static;
+}
+.foto-radio__buttom--text {
+    margin: 15px 0 20px;
+}
