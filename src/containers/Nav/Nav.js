@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { trimStart } from 'lodash';
 
 import './Nav.css';
+import * as elementSelectors from '../../store/elements/reducer';
 
 class Nav extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class Nav extends Component {
         }
     }
     render() {
-        const { path } = this.props;
+        const { path, section } = this.props;
         const pathname = trimStart(this.props.path, '/');
         const links = {
             polls: { name: 'Опросы', style: {} },
@@ -31,11 +32,15 @@ class Nav extends Component {
         }
         for (let link in links) {
             const to = "/" + link;
-            linksArr.push(<Link key={link} to={to} className="nav__link" style={links[link].style}>{links[link].name}</Link>)
+            linksArr.push(<Link key={link} to={to} disabled className="nav__link" style={links[link].style}>{links[link].name}</Link>)
         }
         const out = [];
         if (path === '/polls' || path === '/results') {
             for (let i = 0; i < 2; i++) {
+                out.push(linksArr[i]);
+            }
+        } else if (path === '/entry' && section === undefined) {
+            for (let i = 2; i < 3; i++) {
                 out.push(linksArr[i]);
             }
         } else {
@@ -55,9 +60,9 @@ class Nav extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         path: state.router.location.pathname,
+        section: elementSelectors.getSection(state),
     }
 }
 export default connect(mapStateToProps)(Nav);

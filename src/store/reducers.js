@@ -3,12 +3,12 @@ import { applyMiddleware, combineReducers, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 import operatorStore from './operators/reducer';
-import elementState from './elements/reducer';
+import elementStore from './elements/reducer';
 
 const rootReducer = (history) => combineReducers({
     router: connectRouter(history),
     operatorStore,
-    elementState,
+    elementStore,
 });
 
 const composeEnhancers = (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === undefined ? compose : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 }));

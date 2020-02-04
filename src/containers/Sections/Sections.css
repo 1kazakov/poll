@@ -5,7 +5,7 @@
 }
 .section__text--gray:after {
     content: '';
-    top: 185px;
+    top: 195px;
     left: 0;
     position: absolute;
     width: 100%;

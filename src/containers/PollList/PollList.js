@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './PollList.css';
 
 import Card from '../Card/Card';
 import NewPoll from '../NewPoll/NewPoll';
-import PopupNewPoll from '../PopupNewPoll/PopupNewPoll';
+// import PopupNewPoll from '../PopupNewPoll/PopupNewPoll';
+import * as elementActions from '../../store/elements/actions';
 
 class PollList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            popup: false,
-        }
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
     onShowPopupNewPoll = () => {
-        this.setState({ popup: true });
-    }
-    onClosePopupNewPoll = (value) => {
-        this.setState({ popup: value });
+        this.props.history.push('/entry');
+        this.props.dispatch(elementActions.addPoll({ title: null, subtitle: null }));
+
     }
     render() {
         return (
@@ -28,10 +26,15 @@ class PollList extends Component {
                     <Card title="Заказ одежды для наших сотрудников и прочей тусовки" date="10 декабря 2019" />
                     <Card title="Заказ одежды для наших сотрудников и прочей тусовки" date="10 декабря 2019" />
                 </div>
-                {this.state.popup ? <PopupNewPoll onClosePopupNewPoll={this.onClosePopupNewPoll} /> : null}
+                {/* {this.state.popup ? <PopupNewPoll onClosePopupNewPoll={this.onClosePopupNewPoll} /> : null} */}
             </main>
         )
     }
 }
+const mapStateToProps = (state) => {
+    return {
 
-export default PollList;
+    }
+}
+
+export default connect(mapStateToProps)(PollList);

@@ -1,4 +1,4 @@
-.pull-constructor__controls {
+.poll-constructor__controls {
     left: calc(50% + 400px);
     position: fixed;
     height: 152px;
@@ -10,7 +10,7 @@
     padding: 22px 18px;
 }
 
-.pull-constructor__button-add {
+.poll-constructor__button-add {
     height: 24px;
     width: 24px;
     border: none;

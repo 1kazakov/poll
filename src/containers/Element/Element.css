@@ -1,6 +1,7 @@
 .element {
     padding: 0;
-    margin: 20px 0;
+    margin-top: 30px;
+    margin-bottom: 30px;
     border: none;
     border-bottom: 1px solid #E0E0E0;;
 }
@@ -15,6 +16,7 @@
     display: flex;
 }
 .element__select {
+    width: 310px;
     box-sizing: border-box;
     padding: 5px;
     margin: 0 0 20px;
@@ -22,6 +24,26 @@
     border-radius: 4px;
     font-family: inherit;
     font-size: 14px;
+}
+.element__button {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    align-self:  center;
+    margin-left: 10px;
+}
+.element__button--up {
+    background-image: url(../../img/arrow.svg);
+}
+.element__button--down {
+    background-image: url(../../img/arrow.svg);
+    transform: rotate(180deg);
+}
+.element__button--del {
+    background-image: url(../../img/cross.svg);
 }
 .element__toggle{
     margin: 0 0 0 auto;

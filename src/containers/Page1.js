@@ -6,7 +6,7 @@ import Header from './Header/Header';
 import PollList from './PollList/PollList';
 import PollResult from './PollResult/PollResult';
 import Entry from './Entry/Entry';
-import PullConstructor from './PullConstructor/PullConstructor';
+import PollConstructor from './PollConstructor/PollConstructor';
 import Preview from './Preview/Preview';
 
 
@@ -21,7 +21,7 @@ class Page1 extends Component {
                     <Route path="/polls" component={PollList} />
                     <Route path="/results" component={PollResult} />
                     <Route path="/entry" component={Entry} />
-                    <Route path="/constructor" component={PullConstructor} />
+                    <Route path="/constructor" component={PollConstructor} />
                     <Route path="/preview" component={Preview} />
 
                 </Switch>

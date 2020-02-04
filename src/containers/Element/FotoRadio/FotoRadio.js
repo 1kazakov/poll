@@ -45,11 +45,12 @@ class FotoRadio extends Component {
         });
         this.setState({ foto: out, counter: index, value: values });
     }
-    setUrlImg = (file) =>{
+    setUrlImg = (file) => {
         let reader = new FileReader()
         reader.readAsDataURL(file)
         reader.onloadend = () => {
             let url = reader.result;
+            console.log('url', url)
             // document.getElementById('gallery').appendChild(img)
         }
     }
