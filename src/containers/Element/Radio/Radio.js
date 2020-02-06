@@ -11,20 +11,23 @@ class Radio extends Component {
     // }
     setOptionRadio = (evt) => {
         evt.preventDefault();
-        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: this.props.index, indexOption: evt.target.name, value: evt.target.value }))
+        const { index, position } = this.props;
+        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: index, position: position, optionIndex: evt.target.name, value: evt.target.value }))
     }
     deleteInput = (evt) => {
         evt.preventDefault();
-        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: this.props.index, indexOption: evt.target.name, value: null }))
+        const { index, position } = this.props;
+        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: index, position: position, optionIndex: evt.target.name, value: null }))
     }
     addInput = (evt) => {
         evt.preventDefault();
-        const { counter } = this.props;
-        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: this.props.index, value: '', indexOption: counter }))
+        const { counter, index, position } = this.props;
+        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: index, position: position, value: '', optionIndex: counter }))
     }
     addOther = (evt) => {
         evt.preventDefault();
-        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: this.props.index, indexOption: 99, value: 'other' }))
+        const { index, position } = this.props;
+        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: index, position: position, optionIndex: 99, value: 'other' }))
     }
     render() {
         const { options } = this.props;
@@ -58,10 +61,10 @@ class Radio extends Component {
 const mapStateToProps = (state, props) => {
     return {
         //Если убрать следующую строку то элемент не обновляется, не знаю почему!!! возможно потому что нет глубокой проверки пропсов
-        state: state,
+        // state: state,
         options: elementSelectors.getOptions(state, props.index),
-        counter: elementSelectors.getCounter(state, props.index),
+        counter: elementSelectors.getCounter(state, props.position, props.index),
     }
 }
 
-export default connect(mapStateToProps)(Radio);
+export default connect(mapStateToProps, null, null, { pure: false })(Radio);

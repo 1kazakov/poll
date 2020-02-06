@@ -18,13 +18,14 @@ class Entry extends Component {
     }
     addPoll = (evt) => {
         evt.preventDefault();
-        const { title} = this.props;
+        const { title } = this.props;
+        const { index } = this.props;
         if (title === null || title.trim() === '') {
             this.setState({ warning: <div className="warning">Введите название опроса</div> })
         } else {
             this.setState({ warning: null })
             this.props.history.push('/constructor');
-            this.props.dispatch(elementActions.addSection([{ index: 0, title: 'Заголовок раздела', subtitle: '' }, { elementIndex: String(0) + 1, name: 'fullName', question: 'Введите вопрос', required: false }]))
+            this.props.dispatch(elementActions.addSection([{ index: 0, title: 'Заголовок раздела', subtitle: '', counter: 1 }, { elementIndex: String(0) + 1, name: 'fullName', question: 'Введите вопрос', required: false, position: 1 }]))
         }
     }
 
@@ -55,7 +56,6 @@ class Entry extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         title: elementSelectors.getPollTitle(state),
         subtitle: elementSelectors.getPollSubtitle(state),

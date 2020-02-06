@@ -11,55 +11,74 @@ import * as elementActions from '../../store/elements/actions';
 import * as elementSelectors from '../../store/elements/reducer';
 
 class Element extends Component {
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
 
-        this.option = new Map();
-        this.option.set('fullName', <FullName index={this.props.index} />);
-        this.option.set('address', null);
-        this.option.set('telephone', null);
-        this.option.set('celendar', null);
-        this.option.set('textArea', null);
-        this.option.set('radio', <Radio index={this.props.index} />);
-        this.option.set('checkbox', <Radio index={this.props.index} />);
-        this.option.set('fotoRadio', <FotoRadio index={this.props.index} />);
-        // option.set(fotoCheckbox, )
-        this.option.set('scale', <Scale index={this.props.index} />)
-    }
+    //     this.option = new Map();
+    //     this.option.set('fullName', <FullName index={this.props.index} position={this.props.position} />);
+    //     this.option.set('address', null);
+    //     this.option.set('telephone', null);
+    //     this.option.set('celendar', null);
+    //     this.option.set('textArea', null);
+    //     this.option.set('radio', <Radio index={this.props.index} position={this.props.position} />);
+    //     this.option.set('checkbox', <Radio index={this.props.index} position={this.props.position} />);
+    //     this.option.set('fotoRadio', <FotoRadio index={this.props.index} position={this.props.position} />);
+    //     // option.set(fotoCheckbox, )
+    //     this.option.set('scale', <Scale index={this.props.index} position={this.props.position} />)
+    // }
     setQuestion = (evt) => {
-        const { index } = this.props;
-        this.props.dispatch(elementActions.changeElement({ question: evt.target.value, elementIndex: index }))
+        const { index, position } = this.props;
+        this.props.dispatch(elementActions.changeElement({ question: evt.target.value, elementIndex: index, position: position }))
     }
     selectElement = (evt) => {
-        const { index } = this.props;
+        const { index, position } = this.props;
         const elementName = evt.target.value;
         if (elementName === 'radio' || elementName === 'checkbox' || elementName === 'fotoRadio' || elementName === 'fotoCheckbox') {
-            this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [''], counter: 1 }))
+            this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [''], counter: 1, position: position }))
         } else if (elementName === 'scale') {
-            this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [0, 10] }))
+            this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [0, 10], position: position }))
         } else {
-            this.props.dispatch(elementActions.changeElement({ name: evt.target.value, elementIndex: index }))
+            this.props.dispatch(elementActions.changeElement({ name: evt.target.value, elementIndex: index, position: position }))
         }
     }
     setRequired = (evt) => {
-        const { index } = this.props;
-        this.props.dispatch(elementActions.changeElement({ required: evt.target.checked, elementIndex: index }))
+        const { index, position } = this.props;
+        this.props.dispatch(elementActions.changeElement({ required: evt.target.checked, elementIndex: index, position: position }))
     }
     elementUp = (evt) => {
-        evt.preventDefault()
+        evt.preventDefault();
+        const { element, index } = this.props;
+        const { position } = element;
+        this.props.dispatch(elementActions.transferElement({ position: position, transfer: 'up', elementIndex: index }))
     }
     elementDown = (evt) => {
-        evt.preventDefault()
+        evt.preventDefault();
+        const { element, index } = this.props;
+        const { position } = element;
+        this.props.dispatch(elementActions.transferElement({ position: position, transfer: 'down', elementIndex: index }))
     }
     elementDelete = (evt) => {
         evt.preventDefault()
+        const { element, index } = this.props;
+        const { position } = element;
+        this.props.dispatch(elementActions.deleteElement({ position: position, elementIndex: index }))
     }
     render() {
+        let option = new Map();
+        option.set('fullName', <FullName index={this.props.index} position={this.props.position} />);
+        option.set('address', null);
+        option.set('telephone', null);
+        option.set('celendar', null);
+        option.set('textArea', null);
+        option.set('radio', <Radio index={this.props.index} position={this.props.position} />);
+        option.set('checkbox', <Radio index={this.props.index} position={this.props.position} />);
+        option.set('fotoRadio', <FotoRadio index={this.props.index} position={this.props.position} />);
+        // option.set(fotoCheckbox, )
+        option.set('scale', <Scale index={this.props.index} position={this.props.position} />)
         const { element } = this.props;
         const { question, required } = element;
         const value = element.name;
-        let out = this.option.get(value);
-        // out = out.out;
+        let out = option.get(value);
 
         return (
             <fieldset className="element">
@@ -101,4 +120,4 @@ const mapStateToProps = (state, props) => {
     }
 }
 
-export default connect(mapStateToProps)(Element);
+export default connect(mapStateToProps, null, null, { pure: false })(Element);

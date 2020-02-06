@@ -4,3 +4,5 @@ export const TITLE_SECTION = 'elements/TITLE_SECTION';
 export const ELEMENT_CHANGE = 'elements/CHANGE';
 export const ELEMENT_ADD_OPTION = 'elements/ADD_OPTION_RADIO';
 export const POLL_ADD = 'elements/ADD_POLL';
+export const ELEMENT_TRANSFER = 'elements/TRANSFER';
+export const ELEMENT_DELETE = 'elements/DELETE';

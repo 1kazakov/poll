@@ -16,22 +16,23 @@ class Sections extends Component {
     }
     addElement = (evt) => {
         evt.preventDefault();
-        let { elements, index } = this.props;
+        let { elements, index, counterElements } = this.props;
+        counterElements = counterElements + 1;
         [elements] = elements;
-        const subindex = elements.length;
-        this.props.dispatch(elementActions.addElement({ elementIndex: String(index) + subindex, name: 'fullName', question: 'Введите вопрос', required: false }))
+        const position = elements.length;
+        this.props.dispatch(elementActions.addElement({ elementIndex: String(index) + counterElements, name: 'fullName', question: 'Введите вопрос', required: false, position: position }))
+        this.props.dispatch(elementActions.setSectionTitle({ index: index, counter: counterElements }));
     }
     render() {
         let { elements, index } = this.props;
         [elements] = elements;
+        // elements.sort((a, b) => a.position - b.position)
         const title = elements[0].title;
         const subtitle = elements[0].subtitle;
         const out = [];
         for (let i = 1; i < elements.length; i++) {
-            out.push(<Element index={String(index) + i} />)
+            out.push(<Element index={elements[i].elementIndex} key={elements[i].position} position={elements[i].position} />)
         }
-
-
         return (
             <section className="entry">
                 <form className="entry__form" onSubmit={this.setBlock}>
@@ -54,8 +55,10 @@ class Sections extends Component {
 
 const mapStateToProps = (state, props) => {
     return {
-        elements: elementSelectors.getElements(state, props.index)
+        state: state,
+        elements: elementSelectors.getElements(state, props.index),
+        counterElements: elementSelectors.getSectionCounter(state, props.index)
     }
 }
 
-export default connect(mapStateToProps)(Sections);
+export default connect(mapStateToProps, null, null, { pure: false })(Sections);

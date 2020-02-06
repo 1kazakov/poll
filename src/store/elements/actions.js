@@ -1,4 +1,13 @@
-import { POLL_ADD, ELEMENT_ADD, SECTION_ADD, TITLE_SECTION, ELEMENT_CHANGE, ELEMENT_ADD_OPTION } from './actionTypes';
+import {
+    POLL_ADD,
+    ELEMENT_ADD,
+    SECTION_ADD,
+    TITLE_SECTION,
+    ELEMENT_CHANGE,
+    ELEMENT_ADD_OPTION,
+    ELEMENT_TRANSFER,
+    ELEMENT_DELETE
+} from './actionTypes';
 
 export const addPoll = (poll) => {
     return {
@@ -38,10 +47,20 @@ export const changeElement = (element) => {
 export const addOptionRadio = (obj) => {
     return {
         type: ELEMENT_ADD_OPTION,
-        payload: {
-            value: obj.value,
-            elementIndex: obj.elementIndex,
-            optionIndex: obj.indexOption,
-        }
+        payload: obj,
+    }
+}
+
+export const transferElement = (obj) => {
+    return {
+        type: ELEMENT_TRANSFER,
+        payload: obj,
+    }
+}
+
+export const deleteElement = (obj) => {
+    return {
+        type: ELEMENT_DELETE,
+        payload: obj,
     }
 }
