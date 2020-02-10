@@ -16,8 +16,12 @@ class PollConstructor extends Component {
     addSection = (evt) => {
         evt.preventDefault()
         const { sections } = this.props;
-        const index = sections.length;
-        this.props.dispatch(elementActions.addSection([{ index: index, title: 'Загловок раздела', subtitle: '', counter: 1 }, { elementIndex: String(index) + 1, name: 'fullName', question: 'Введите вопрос', required: false, position:  1}]))
+        const sectionIndex = sections.length;
+        let elementIndex = sectionIndex
+        if (elementIndex < 10) {
+            elementIndex = '0' + sectionIndex;
+        }
+        this.props.dispatch(elementActions.addSection([{ index: sectionIndex, title: 'Загловок раздела', subtitle: '', counter: 1 }, { elementIndex: elementIndex + '01', name: 'fullName', question: 'Введите вопрос', required: false, position: 1 }]))
     }
     render() {
         let out = [];

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Element.css';
 
-import FullName from './FullName/FullName';
 import Radio from './Radio/Radio';
 import FotoRadio from './FotoRadio/FotoRadio';
 import Scale from './Scale/Scale';
@@ -65,7 +64,7 @@ class Element extends Component {
     }
     render() {
         let option = new Map();
-        option.set('fullName', <FullName index={this.props.index} position={this.props.position} />);
+        option.set('fullName', null);
         option.set('address', null);
         option.set('telephone', null);
         option.set('celendar', null);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './FullName.css';
+import './PreFullName.css';
 
-class FullName extends Component {
+class PreFullName extends Component {
     render() {
         return (
             <div className="full-name">
@@ -22,4 +22,4 @@ class FullName extends Component {
     }
 }
 
-export default FullName;
+export default PreFullName;

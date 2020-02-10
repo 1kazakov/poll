@@ -18,13 +18,23 @@ class Sections extends Component {
         evt.preventDefault();
         let { elements, index, counterElements } = this.props;
         counterElements = counterElements + 1;
+        let elementIndex = '';
+        if (index < 10 && counterElements < 10) {
+            elementIndex = '0' + index + '0' + counterElements;
+        } else if (index < 10 && counterElements >= 10) {
+            elementIndex = '0' + index + counterElements;
+        } else if (index >= 10 && counterElements < 10) {
+            elementIndex = index + '0' + counterElements;
+        } else {
+            elementIndex = String(index) + counterElements;
+        }
         [elements] = elements;
         const position = elements.length;
-        this.props.dispatch(elementActions.addElement({ elementIndex: String(index) + counterElements, name: 'fullName', question: 'Введите вопрос', required: false, position: position }))
+        this.props.dispatch(elementActions.addElement({ elementIndex: elementIndex, name: 'fullName', question: 'Введите вопрос', required: false, position: position }))
         this.props.dispatch(elementActions.setSectionTitle({ index: index, counter: counterElements }));
     }
     render() {
-        let { elements, index } = this.props;
+        let { elements } = this.props;
         [elements] = elements;
         // elements.sort((a, b) => a.position - b.position)
         const title = elements[0].title;

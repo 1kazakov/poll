@@ -1,21 +1,17 @@
 import { POLL_ADD, SECTION_ADD, TITLE_SECTION, ELEMENT_ADD, ELEMENT_CHANGE, ELEMENT_ADD_OPTION, ELEMENT_TRANSFER, ELEMENT_DELETE } from './actionTypes';
-import { nth } from 'lodash';
 
 const initialState = {
     elements: {}
 }
 
 const firstIndex = (elementIndex) => {
-    let index = elementIndex.toString().split('');
-    //let index =  Number(elementIndex[0] + elementIndex[1])     <------------------------------------
-    index = Number(nth(index, 0));
+    let index = Number(elementIndex[0] + elementIndex[1]);
     return index;
 }
-const secondIndex = (elementIndex) => {
-    let index = elementIndex.toString().split('');
-    index = Number(nth(index, 1));
-    return index;
-}
+// const secondIndex = (elementIndex) => {
+//     let index = Number(elementIndex[2] + elementIndex[3]);
+//     return index;
+// }
 export const getElements = (state, index) => {
     if (!state.elementStore) {
         return state.elements.section.filter(element => element[0].index === index);
@@ -107,10 +103,6 @@ export default function reduce(state = initialState, action) {
                 let elementsAfter = section.slice(position + 1, section.length);
                 for (let i = 0; i < elementsAfter.length; i++) {
                     elementsAfter[i].position = elementsAfter[i].position - 1;
-                    // const index = firstIndex(elementsAfter[i].elementIndex);
-                    // let subindex = secondIndex(elementsAfter[i].elementIndex);
-                    // subindex = subindex - 1;
-                    // elementsAfter[i].elementIndex = String(index) + subindex;
                 }
                 section.splice(0, section.length, ...elementsBefore, ...elementsAfter);
                 let otherSection = state.elements.section.filter(section => section[0].index !== indexSection);
@@ -125,7 +117,7 @@ export default function reduce(state = initialState, action) {
             {
                 const { position } = action.payload;
                 const index = firstIndex(action.payload.elementIndex);
-                const elementIndex = secondIndex(action.payload.elementIndex);
+                // const elementIndex = secondIndex(action.payload.elementIndex);
                 let [element] = state.elements.section.filter(section => section[0].index === index);
                 element[position] = { ...element[position], ...action.payload };
                 let otherElements = state.elements.section.filter(section => section[0].index !== index);
@@ -139,11 +131,12 @@ export default function reduce(state = initialState, action) {
         case ELEMENT_ADD_OPTION:
             {
                 const index = firstIndex(action.payload.elementIndex);
-                const elementIndex = secondIndex(action.payload.elementIndex);
+                // const elementIndex = secondIndex(action.payload.elementIndex);
                 const { optionIndex, position } = action.payload;
                 // let [element] = state.elements.section.filter(section => section[0].index === index);
                 let [element] = getElements(state, index)
-                if (action.payload.value !== null && action.payload.indexOption !== 99) {
+                console.log('element[position].value[+optionIndex]', element[position].value[+optionIndex])
+                if (action.payload.value !== null && action.payload.indexOption !== 99 && element[position].value[+optionIndex] === undefined) {
                     element[position].counter += 1;
                 }
                 element[position].value[optionIndex] = action.payload.value;
@@ -208,6 +201,10 @@ export default function reduce(state = initialState, action) {
 
 
 //Selectors
+
+export const getPoll = (state) => {
+    return state.elementStore.elements
+}
 
 export const getPollTitle = (state) => {
     return state.elementStore.elements.title;

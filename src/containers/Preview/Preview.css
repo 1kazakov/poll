@@ -1,0 +1,41 @@
+.preview__block {
+    position: relative;
+    box-sizing: border-box;
+    margin: 20px auto;
+    width: 746px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 20px;
+    /* overflow: hidden; */
+}
+.preview__block--title {
+    padding-top: 70px;
+}
+.preview__label {
+    position: absolute;
+    padding: 15px;
+    left: 24px;
+    top: 0;
+
+    background: #1F84DB;
+    border-radius: 0px 0px 6px 6px;
+    color: #FFFFFF;
+
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.preview__title {
+    padding: 0 0 15px;
+    margin: 0;
+    width: 100%;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+.preview__subtitle {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    line-height: 20px;
+}
