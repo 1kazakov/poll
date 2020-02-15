@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import './PreRadio.css';
 
 class PreRadio extends Component {
-
     render() {
         const { value, name, id } = this.props;
         let out = [];

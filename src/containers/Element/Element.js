@@ -10,21 +10,7 @@ import * as elementActions from '../../store/elements/actions';
 import * as elementSelectors from '../../store/elements/reducer';
 
 class Element extends Component {
-    // constructor(props) {
-    //     super(props);
 
-    //     this.option = new Map();
-    //     this.option.set('fullName', <FullName index={this.props.index} position={this.props.position} />);
-    //     this.option.set('address', null);
-    //     this.option.set('telephone', null);
-    //     this.option.set('celendar', null);
-    //     this.option.set('textArea', null);
-    //     this.option.set('radio', <Radio index={this.props.index} position={this.props.position} />);
-    //     this.option.set('checkbox', <Radio index={this.props.index} position={this.props.position} />);
-    //     this.option.set('fotoRadio', <FotoRadio index={this.props.index} position={this.props.position} />);
-    //     // option.set(fotoCheckbox, )
-    //     this.option.set('scale', <Scale index={this.props.index} position={this.props.position} />)
-    // }
     setQuestion = (evt) => {
         const { index, position } = this.props;
         this.props.dispatch(elementActions.changeElement({ question: evt.target.value, elementIndex: index, position: position }))
@@ -32,8 +18,10 @@ class Element extends Component {
     selectElement = (evt) => {
         const { index, position } = this.props;
         const elementName = evt.target.value;
-        if (elementName === 'radio' || elementName === 'checkbox' || elementName === 'fotoRadio' || elementName === 'fotoCheckbox') {
+        if (elementName === 'radio' || elementName === 'checkbox') {
             this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [''], counter: 1, position: position }))
+        } else if (elementName === 'fotoRadio' || elementName === 'fotoCheckbox') {
+            this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [{ description: '', url: null }], counter: 1, position: position }))
         } else if (elementName === 'scale') {
             this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [0, 10], position: position }))
         } else {
@@ -69,10 +57,10 @@ class Element extends Component {
         option.set('telephone', null);
         option.set('celendar', null);
         option.set('textArea', null);
-        option.set('radio', <Radio index={this.props.index} position={this.props.position} />);
-        option.set('checkbox', <Radio index={this.props.index} position={this.props.position} />);
-        option.set('fotoRadio', <FotoRadio index={this.props.index} position={this.props.position} />);
-        // option.set(fotoCheckbox, )
+        option.set('radio', <Radio index={this.props.index} position={this.props.position} class='circle' />);
+        option.set('checkbox', <Radio index={this.props.index} position={this.props.position} class='square' />);
+        option.set('fotoRadio', <FotoRadio index={this.props.index} position={this.props.position} class='circle' />);
+        option.set('fotoCheckbox', <FotoRadio index={this.props.index} position={this.props.position} class='square' />)
         option.set('scale', <Scale index={this.props.index} position={this.props.position} />)
         const { element } = this.props;
         const { question, required } = element;

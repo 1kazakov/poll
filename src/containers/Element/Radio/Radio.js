@@ -34,17 +34,20 @@ class Radio extends Component {
         const out = [];
         for (let i = 1; i < options.length; i++) {
             if (i === 99 && options[i] !== null) {
-                out.push(<div className="radio__input-wrapper" key={i} style={{ paddingLeft: '26px', fontSize: '14px' }}> Другое <button name={i} className="button--del" onClick={this.deleteInput}></button></div>);
+                out.push(<div className={`radio__input-wrapper radio__input-wrapper--other ${this.props.class}`} key={i} > Другое <button name={i} className="button--del" onClick={this.deleteInput}></button></div>);
                 break;
             }
             if (options[i] !== null && options[i] !== undefined) {
-                out.push(<div className="radio__input-wrapper" key={i}><input type="text" name={i} className="input radio__input" placeholder="Введите вариант ответа" onChange={this.setOptionRadio} value={options[i]} /> <button name={i} className="button--del" onClick={this.deleteInput}></button></div>)
+                out.push(<div className={`radio__input-wrapper ${this.props.class}`} key={i}>
+                    <input type="text" name={i} className="input radio__input" placeholder="Введите вариант ответа" onChange={this.setOptionRadio} value={options[i]} />
+                    <button name={i} className="button--del" onClick={this.deleteInput}></button>
+                </div>)
             }
         }
 
         return (
             <div className="radio">
-                <div className="radio__input-wrapper">
+                <div className={`radio__input-wrapper ${this.props.class}`}>
                     <input className="input radio__input" placeholder="Введите вариант ответа" name='0' onChange={this.setOptionRadio} value={options[0]} />
                 </div>
                 {out}

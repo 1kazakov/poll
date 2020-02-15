@@ -10,23 +10,29 @@ import PreTelephone from './PreTelephone/PreTelephone';
 import PreCelendar from './PreCelendar/PreCelendar';
 import PreCheckbox from './PreCheckbox/PreCheckbox';
 import PreScale from './PreScale/PreScale';
+import PreFotoRadio from './PreFotoRadio/PreFotoRadio';
+import PreFotoCheckbox from './PreFotoCheckbox/PreFotoCheckbox';
 
 import * as elementSelectors from '../../store/elements/reducer';
-
-
+import * as resultActions from '../../store/results/actions';
 
 
 class Preview extends Component {
+    constructor(props) {
+        super(props);
+        this.props.dispatch(resultActions.setResult(this.props.poll))
+
+    }
+    componentDidMount() {
+        // this.props.dispatch(resultActions.setResult(this.props.poll))
+    }
     render() {
+        // console.log('props', this.props.getState())
+
         let option = new Map();
-        option.set('fotoRadio', null);
-        // option.set(fotoCheckbox, )
-        option.set('scale', null)
 
         const { poll } = this.props;
         const {
-            // title,
-            // subtitle,
             section } = poll;
         let out = [];
         for (let elements of section) {
@@ -41,23 +47,28 @@ class Preview extends Component {
                     </section>)
                 } else {
                     if (element.name === 'fullName') {
-                        option = <PreFullName />
+                        option = <PreFullName name={element.name} id={element.elementIndex} position={element.position} />
                     } else if (element.name === 'radio') {
-                        option = <PreRadio value={element.value} name={element.name} id={element.elementIndex} />
+                        option = <PreRadio value={element.value} name={element.name} id={element.elementIndex} position={element.position} />
                     } else if (element.name === 'textArea') {
-                        option = <PreTextArea name={element.name} id={element.elementIndex} />
+                        option = <PreTextArea name={element.name} id={element.elementIndex} position={element.position} />
                     } else if (element.name === 'address') {
-                        option = <PreAddres name={element.name} id={element.elementIndex} />
+                        option = <PreAddres name={element.name} id={element.elementIndex} position={element.position} />
                     } else if (element.name === 'telephone') {
-                        option = <PreTelephone name={element.name} id={element.elementIndex} />
+                        option = <PreTelephone name={element.name} id={element.elementIndex} position={element.position} />
                     } else if (element.name === 'celendar') {
-                        option = <PreCelendar name={element.name} id={element.elementIndex} />
+                        option = <PreCelendar name={element.name} id={element.elementIndex} position={element.position} />
                     } else if (element.name === 'checkbox') {
-                        option = <PreCheckbox value={element.value} name={element.name} id={element.elementIndex} />
+                        option = <PreCheckbox value={element.value} name={element.name} id={element.elementIndex} position={element.position} />
                     } else if (element.name === 'scale') {
-                        option = <PreScale name={element.name} id={element.elementIndex} />
+                        option = <PreScale name={element.name} id={element.elementIndex} position={element.position} />
+                    } else if (element.name === 'fotoRadio') {
+                        option = <PreFotoRadio value={element.value} name={element.name} id={element.elementIndex} position={element.position} />
+                    } else if (element.name === 'fotoCheckbox') {
+                        option = <PreFotoCheckbox value={element.value} name={element.name} id={element.elementIndex} position={element.position} />
                     } else {
-                        option = <PreFullName name={element.name} id={element.elementIndex} />
+                        console.log('таких элементов нет')
+                        // option = <PreFullName name={element.name} id={element.elementIndex} />
                     }
                     elementOut = elementOut.concat(<section className="preview__block">
                         <h3 className="preview__title">{element.question}</h3>
@@ -84,6 +95,9 @@ class Preview extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log('state', state)
+    // console.log('store', store)
+
     return {
         poll: elementSelectors.getPoll(state),
     }

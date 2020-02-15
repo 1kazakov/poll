@@ -1,0 +1,26 @@
+.pre-foro-checkbox__checkbox {
+    box-sizing: border-box;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    /* border: 1px solid #FFFFFF; */
+    background: #ffffff;
+    border-radius: 6px;
+    opacity: 0.5;
+}
+
+.pre-foro-radio__input:checked + .pre-foro-checkbox__checkbox {
+    border: none;
+    background-color: none;
+    opacity: 1;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-image: url(../../../img/checkboxchecked.svg);
+}
+.pre-foro-radio__input:focus + .pre-foro-radio__radio,
+.pre-foro-radio__input:hover + .pre-foro-radio__radio {
+    box-shadow: 0 0 5px 1px #4A90E2;
+}

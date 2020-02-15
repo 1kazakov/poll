@@ -4,7 +4,7 @@ const initialState = {
     elements: {}
 }
 
-const firstIndex = (elementIndex) => {
+export const firstIndex = (elementIndex) => {
     let index = Number(elementIndex[0] + elementIndex[1]);
     return index;
 }
@@ -139,7 +139,16 @@ export default function reduce(state = initialState, action) {
                 if (action.payload.value !== null && action.payload.indexOption !== 99 && element[position].value[+optionIndex] === undefined) {
                     element[position].counter += 1;
                 }
-                element[position].value[optionIndex] = action.payload.value;
+                //---------------------------------------------------------------
+                if (typeof action.payload.value !== 'object') {
+                    element[position].value[optionIndex] = action.payload.value;
+                } else {
+                    console.log('1111111111111111111111111111111111111111111')
+                    console.log('element[position].value[optionIndex]', element[position].value[optionIndex])
+                    element[position].value[optionIndex] = { ...element[position].value[optionIndex], ...action.payload.value }
+                }
+                //---------------------------------------------------------------
+                // element[position].value[optionIndex] = action.payload.value;
                 let otherElements = state.elements.section.filter(section => section[0].index !== index);
                 otherElements.push(element);
                 otherElements.sort((a, b) => a[0].index - b[0].index);

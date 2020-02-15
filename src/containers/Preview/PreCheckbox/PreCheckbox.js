@@ -4,7 +4,7 @@ import './PreCheckbox.css';
 
 class PreCheckbox extends Component {
     render() {
-        const { value, name, id } = this.props;
+        const { value } = this.props;
         let out = [];
         for (let i = 0; i < value.length; i++) {
             //Необходимо посмотреть атрибуты name и value у радио инпутов

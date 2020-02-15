@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 
 import './PreScale.css';
@@ -70,9 +70,7 @@ class Scale extends Component {
                 opacity: 1,
                 backgroundColor: 'currentColor',
             },
-            markLabel: { // <-----------------------
-                // width: '20px',
-                // textAlign: 'right',
+            markLabel: { 
                 marginLeft: '3px',
                 color: '#AFB8BB',
             },

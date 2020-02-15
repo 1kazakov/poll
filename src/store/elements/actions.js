@@ -6,7 +6,7 @@ import {
     ELEMENT_CHANGE,
     ELEMENT_ADD_OPTION,
     ELEMENT_TRANSFER,
-    ELEMENT_DELETE
+    ELEMENT_DELETE,
 } from './actionTypes';
 
 export const addPoll = (poll) => {
@@ -64,3 +64,5 @@ export const deleteElement = (obj) => {
         payload: obj,
     }
 }
+
+
