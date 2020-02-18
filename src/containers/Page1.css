@@ -59,6 +59,7 @@
     border: 1px solid #E0E0E0;
     border-radius: 4px;
     width: 100%;
+    max-width: 706px;
     font-family: inherit;
 }
 .toggle__text {

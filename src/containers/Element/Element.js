@@ -13,42 +13,42 @@ class Element extends Component {
 
     setQuestion = (evt) => {
         const { index, position } = this.props;
-        this.props.dispatch(elementActions.changeElement({ question: evt.target.value, elementIndex: index, position: position }))
+        this.props.dispatch(elementActions.changeElement({ question: evt.target.value, elementIndex: index, position }))
     }
     selectElement = (evt) => {
         const { index, position } = this.props;
         const elementName = evt.target.value;
         if (elementName === 'radio' || elementName === 'checkbox') {
-            this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [''], counter: 1, position: position }))
+            this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [''], counter: 1, position }))
         } else if (elementName === 'fotoRadio' || elementName === 'fotoCheckbox') {
-            this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [{ description: '', url: null }], counter: 1, position: position }))
+            this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [{ description: '', url: null }], counter: 1, position }))
         } else if (elementName === 'scale') {
-            this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [0, 10], position: position }))
+            this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [0, 10], position }))
         } else {
-            this.props.dispatch(elementActions.changeElement({ name: evt.target.value, elementIndex: index, position: position }))
+            this.props.dispatch(elementActions.changeElement({ name: evt.target.value, elementIndex: index, position }))
         }
     }
     setRequired = (evt) => {
         const { index, position } = this.props;
-        this.props.dispatch(elementActions.changeElement({ required: evt.target.checked, elementIndex: index, position: position }))
+        this.props.dispatch(elementActions.changeElement({ required: evt.target.checked, elementIndex: index, position }))
     }
     elementUp = (evt) => {
         evt.preventDefault();
         const { element, index } = this.props;
         const { position } = element;
-        this.props.dispatch(elementActions.transferElement({ position: position, transfer: 'up', elementIndex: index }))
+        this.props.dispatch(elementActions.transferElement({ position, transfer: 'up', elementIndex: index }))
     }
     elementDown = (evt) => {
         evt.preventDefault();
         const { element, index } = this.props;
         const { position } = element;
-        this.props.dispatch(elementActions.transferElement({ position: position, transfer: 'down', elementIndex: index }))
+        this.props.dispatch(elementActions.transferElement({ position, transfer: 'down', elementIndex: index }))
     }
     elementDelete = (evt) => {
         evt.preventDefault()
         const { element, index } = this.props;
         const { position } = element;
-        this.props.dispatch(elementActions.deleteElement({ position: position, elementIndex: index }))
+        this.props.dispatch(elementActions.deleteElement({ position, elementIndex: index }))
     }
     render() {
         let option = new Map();

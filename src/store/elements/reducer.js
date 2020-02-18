@@ -1,4 +1,14 @@
-import { POLL_ADD, SECTION_ADD, TITLE_SECTION, ELEMENT_ADD, ELEMENT_CHANGE, ELEMENT_ADD_OPTION, ELEMENT_TRANSFER, ELEMENT_DELETE } from './actionTypes';
+import {
+    POLL_ADD,
+    SECTION_ADD,
+    SECTION_TRANSFER,
+    TITLE_SECTION,
+    ELEMENT_ADD,
+    ELEMENT_CHANGE,
+    ELEMENT_ADD_OPTION,
+    ELEMENT_TRANSFER,
+    ELEMENT_DELETE
+} from './actionTypes';
 
 const initialState = {
     elements: {}
@@ -8,10 +18,6 @@ export const firstIndex = (elementIndex) => {
     let index = Number(elementIndex[0] + elementIndex[1]);
     return index;
 }
-// const secondIndex = (elementIndex) => {
-//     let index = Number(elementIndex[2] + elementIndex[3]);
-//     return index;
-// }
 export const getElements = (state, index) => {
     if (!state.elementStore) {
         return state.elements.section.filter(element => element[0].index === index);
@@ -39,6 +45,13 @@ export const getElementByPosition = (state, position, indexSection) => {
     }
     return element;
 }
+export const getSection = (state) => {
+    if (!state.elementStore) {
+        return state.elements.section;
+    }
+    return state.elementStore.elements.section;
+}
+
 
 //REDUCE
 
@@ -66,15 +79,48 @@ export default function reduce(state = initialState, action) {
                     elements: elements
                 }
             }
+        case SECTION_TRANSFER:
+            {
+                let { index, position, transfer } = action.payload;
+                let sections = getSection(state);
+                const [section] = getElements(state, index);
+                sections = sections.filter(section => section[0].index !== index);
+                if (transfer === 'up') {
+                    if (position === 0) {
+                        return { ...state };
+                    }
+                    const positionBefore = position - 1;
+                    const [sectionBefore] = sections.filter(section => section[0].position === positionBefore);
+                    sections = sections.filter(section => section[0].position !== positionBefore);
+                    sectionBefore[0].position = position;
+                    section[0].position = positionBefore;
+                    sections = sections.concat(new Array(sectionBefore));
+                } else {
+                    if (position === sections.length) {
+                        return { ...state };
+                    }
+                    const positionAfter = position + 1;
+                    const [sectionAfter] = sections.filter(section => section[0].position === positionAfter);
+                    sections = sections.filter(section => section[0].position !== positionAfter);
+                    sectionAfter[0].position = position;
+                    section[0].position = positionAfter;
+                    sections = sections.concat(new Array(sectionAfter));
+                }
+                sections = sections.concat(new Array(section));
+                sections.sort((a, b) => a[0].position - b[0].position);
+                console.log('sections', sections)
+                return { ...state, elements: { ...state.elements, section: sections } }
+            }
         case TITLE_SECTION:
             {
-                let index = action.payload.index;
-                let [element] = state.elements.section.filter(section => section[0].index === index);
+                let { index } = action.payload;
+                // let [element] = state.elements.section.filter(section => section[0].index === index);
+                let [element] = getElements(state, index);
                 element[0] = { ...element[0], ...action.payload };
                 let otherElements = state.elements.section.filter(section => section[0].index !== index)
                 otherElements = otherElements.concat(new Array(element));
                 if (otherElements.length > 1) {
-                    otherElements.sort((a, b) => a[0].index - b[0].index);
+                    otherElements.sort((a, b) => a[0].position - b[0].position);
                 }
                 return {
                     ...state,
@@ -88,7 +134,7 @@ export default function reduce(state = initialState, action) {
                 element = element.concat(action.payload);
                 let otherElements = state.elements.section.filter(section => section[0].index !== index)
                 otherElements = otherElements.concat(new Array(element));
-                otherElements.sort((a, b) => a[0].index - b[0].index);
+                otherElements.sort((a, b) => a[0].position - b[0].position);
                 return {
                     ...state,
                     elements: { ...state.elements, section: otherElements }
@@ -107,7 +153,7 @@ export default function reduce(state = initialState, action) {
                 section.splice(0, section.length, ...elementsBefore, ...elementsAfter);
                 let otherSection = state.elements.section.filter(section => section[0].index !== indexSection);
                 otherSection = otherSection.concat(new Array(section));
-                otherSection.sort((a, b) => a[0].index - b[0].index);
+                otherSection.sort((a, b) => a[0].position - b[0].position);
                 return {
                     ...state,
                     elements: { ...state.elements, section: otherSection }
@@ -122,7 +168,7 @@ export default function reduce(state = initialState, action) {
                 element[position] = { ...element[position], ...action.payload };
                 let otherElements = state.elements.section.filter(section => section[0].index !== index);
                 otherElements.push(element);
-                otherElements.sort((a, b) => a[0].index - b[0].index);
+                otherElements.sort((a, b) => a[0].position - b[0].position);
                 return {
                     ...state,
                     elements: { ...state.elements, section: otherElements }
@@ -151,7 +197,7 @@ export default function reduce(state = initialState, action) {
                 // element[position].value[optionIndex] = action.payload.value;
                 let otherElements = state.elements.section.filter(section => section[0].index !== index);
                 otherElements.push(element);
-                otherElements.sort((a, b) => a[0].index - b[0].index);
+                otherElements.sort((a, b) => a[0].position - b[0].position);
                 return {
                     ...state,
                     elements: { ...state.elements, section: otherElements }
@@ -197,7 +243,7 @@ export default function reduce(state = initialState, action) {
                     }
                 })
                 otherSection = otherSection.concat(new Array(section))
-                otherSection.sort((a, b) => a[0].index - b[0].index);
+                otherSection.sort((a, b) => a[0].position - b[0].position);
                 return {
                     ...state,
                     elements: { ...state.elements, section: otherSection }
@@ -225,8 +271,9 @@ export const getSectionCounter = (state, index) => {
     const [elements] = getElements(state, index);
     return elements[0].counter
 }
-export const getSection = (state) => {
-    return state.elementStore.elements.section;
+export const getSectionPosition = (state, index) => {
+    const [elements] = getElements(state, index);
+    return elements[0].position;
 }
 export const getOptions = (state, elementIndex) => {
     const element = getElement(state, elementIndex)

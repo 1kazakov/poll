@@ -30,10 +30,25 @@ class Sections extends Component {
         }
         [elements] = elements;
         const position = elements.length;
-        this.props.dispatch(elementActions.addElement({ elementIndex: elementIndex, name: 'fullName', question: 'Введите вопрос', required: false, position: position }))
-        this.props.dispatch(elementActions.setSectionTitle({ index: index, counter: counterElements }));
+        this.props.dispatch(elementActions.addElement({ elementIndex, name: 'fullName', question: 'Введите вопрос', required: false, position }))
+        this.props.dispatch(elementActions.setSectionTitle({ index, counter: counterElements }));
+    }
+    sectionUp = (evt) => {
+        evt.preventDefault();
+        const { index, position } = this.props;
+        this.props.dispatch(elementActions.transferSection({ position, transfer: 'up', index }))
+    }
+    sectionDown = (evt) => {
+        evt.preventDefault();
+        const { index, position } = this.props;
+        this.props.dispatch(elementActions.transferSection({ position, transfer: 'down', index }))
+    }
+    sectionDelete = (evt) => {
+        evt.preventDefault();
+
     }
     render() {
+        console.log('this.props', this.props)
         let { elements } = this.props;
         [elements] = elements;
         // elements.sort((a, b) => a.position - b.position)
@@ -44,8 +59,11 @@ class Sections extends Component {
             out.push(<Element index={elements[i].elementIndex} key={elements[i].position} position={elements[i].position} />)
         }
         return (
-            <section className="entry">
+            <section className="section">
                 <form className="entry__form" onSubmit={this.setBlock}>
+                    <button onClick={this.sectionUp} className="section__button section__button--up"></button>
+                    <button onClick={this.sectionDown} className="section__button section__button--down"></button>
+                    <button onClick={this.sectionDelete} className="section__button section__button--del"></button>
                     <label className="entry__label">
                         <span className="entry__text">Заголовок раздела</span>
                         <input name="title" type="text" className="input" value={title} onChange={this.onChange} />
@@ -65,7 +83,8 @@ class Sections extends Component {
 
 const mapStateToProps = (state, props) => {
     return {
-        state: state,
+        // state: state,
+        position: elementSelectors.getSectionPosition(state, props.index),
         elements: elementSelectors.getElements(state, props.index),
         counterElements: elementSelectors.getSectionCounter(state, props.index)
     }

@@ -40,13 +40,22 @@ export default function reduce(state = initialState, action) {
         //     }
         case SET_RESULT:
             const { payload } = action;
-            console.log('payload', payload)
             const sections = payload.section;
             let answers = {};
             for (let element of sections) {
-                const answer = {};
+                let answer = {};
                 for (let i = 1; i < element.length; i++) {
-                    answer['element' + i] = { question: element[i].question, answer: '' }
+                    if (element[i].name === 'checkbox') {
+                        answer = []
+                        for (let value of element[i].value) {
+                            console.log('value', value)
+                            answer = answer.concat({ value, checked: false })
+                        }
+                        answer['element' + i] = { question: element[i].question, answer }
+                    } else {
+                        answer['element' + i] = { question: element[i].question, answer: '' }
+                    }
+
                 }
                 answers['section' + element[0].index] = { title: element[0].title, answer }
             }

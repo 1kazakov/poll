@@ -2,6 +2,7 @@ import {
     POLL_ADD,
     ELEMENT_ADD,
     SECTION_ADD,
+    SECTION_TRANSFER,
     TITLE_SECTION,
     ELEMENT_CHANGE,
     ELEMENT_ADD_OPTION,
@@ -64,5 +65,9 @@ export const deleteElement = (obj) => {
         payload: obj,
     }
 }
-
-
+export const transferSection = (obj) => {
+    return {
+        type: SECTION_TRANSFER,
+        payload: obj,
+    }
+}

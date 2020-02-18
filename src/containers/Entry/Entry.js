@@ -25,7 +25,7 @@ class Entry extends Component {
         } else {
             this.setState({ warning: null })
             this.props.history.push('/constructor');
-            this.props.dispatch(elementActions.addSection([{ index: 0, title: 'Заголовок раздела', subtitle: '', counter: 1 }, { elementIndex: '0001', name: 'fullName', question: 'Введите вопрос', required: false, position: 1 }]))
+            this.props.dispatch(elementActions.addSection([{ index: 0, title: 'Заголовок раздела', subtitle: '', counter: 1, position: 0 }, { elementIndex: '0001', name: 'fullName', question: 'Введите вопрос', required: false, position: 1 }]))
         }
     }
 

@@ -21,7 +21,7 @@ class PollConstructor extends Component {
         if (elementIndex < 10) {
             elementIndex = '0' + sectionIndex;
         }
-        this.props.dispatch(elementActions.addSection([{ index: sectionIndex, title: 'Загловок раздела', subtitle: '', counter: 1 }, { elementIndex: elementIndex + '01', name: 'fullName', question: 'Введите вопрос', required: false, position: 1 }]))
+        this.props.dispatch(elementActions.addSection([{ index: sectionIndex, title: 'Загловок раздела', subtitle: '', counter: 1, position: sectionIndex }, { elementIndex: elementIndex + '01', name: 'fullName', question: 'Введите вопрос', required: false, position: 1 }]))
     }
     render() {
         let out = [];
@@ -42,10 +42,9 @@ class PollConstructor extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        //Если убрать следующую строку то элемент не обновляется, не знаю почему!!! возможно потому что нет глубокой проверки пропсов
-        state: state,
+        // state: state,
         sections: elementSelectors.getSection(state),
     }
 }
 
-export default connect(mapStateToProps)(PollConstructor);
+export default connect(mapStateToProps, null, null, { pure: false })(PollConstructor);
