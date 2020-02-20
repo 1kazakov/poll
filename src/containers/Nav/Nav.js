@@ -35,16 +35,16 @@ class Nav extends Component {
             linksArr.push(<Link key={link} to={to} disabled className="nav__link" style={links[link].style}>{links[link].name}</Link>)
         }
         const out = [];
-        if (path === '/polls' || path === '/results') {
-            for (let i = 0; i < 2; i++) {
-                out.push(linksArr[i]);
-            }
-        } else if (path === '/entry' && section === undefined) {
+        if (path === '/entry' && section === undefined) {
             for (let i = 2; i < 3; i++) {
                 out.push(linksArr[i]);
             }
-        } else {
+        } else if (path === '/entry' || path === '/constructor' || path === '/preview') {
             for (let i = 2; i < linksArr.length; i++) {
+                out.push(linksArr[i]);
+            }
+        } else {
+            for (let i = 0; i < 2; i++) {
                 out.push(linksArr[i]);
             }
         }

@@ -7,9 +7,6 @@ import * as elementActions from '../../store/elements/actions';
 import * as elementSelectors from '../../store/elements/reducer';
 
 class PollConstructor extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
     shouldComponentUpdate() {
         return true;
     }
@@ -27,7 +24,9 @@ class PollConstructor extends Component {
         let out = [];
         const { sections } = this.props;
         for (let section of sections) {
-            out.push(<Sections key={section[0].index} index={section[0].index} />)
+            if (section[0].index !== null) {
+                out.push(<Sections key={section[0].index} index={section[0].index} />)
+            }
         }
         return (
             <div>
@@ -42,7 +41,6 @@ class PollConstructor extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        // state: state,
         sections: elementSelectors.getSection(state),
     }
 }

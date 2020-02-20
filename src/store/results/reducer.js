@@ -1,6 +1,5 @@
 import { RESET_RESULT, SET_RESULT, SET_ANSWER } from './actionTypes';
 import { firstIndex } from '../elements/reducer';
-import { keys } from '@material-ui/core/styles/createBreakpoints';
 
 const initialState = {
     result: {}
@@ -16,10 +15,6 @@ export const getElement = (state, elementIndex, position) => {
         return state.resultStore.result.answers['section' + sectionIndex].answer['element' + position];
     }
 }
-const getSection = (state, elementIndex) => {
-    const sectionIndex = firstIndex(elementIndex);
-    return state.result.answers['section' + sectionIndex]
-}
 const getSections = (state) => {
     return state.result.answers
 }
@@ -27,17 +22,9 @@ const getSections = (state) => {
 //REDUCE
 
 export default function reduce(state = initialState, action) {
-    console.log('payload', action.payload)
     switch (action.type) {
         case RESET_RESULT:
             return initialState;
-        // case POLL_ADD:
-        //     {
-        //         return {
-        //             ...state,
-        //             result: { ...state.elements, ...action.payload },
-        //         }
-        //     }
         case SET_RESULT:
             const { payload } = action;
             const sections = payload.section;
@@ -46,10 +33,19 @@ export default function reduce(state = initialState, action) {
                 let answer = {};
                 for (let i = 1; i < element.length; i++) {
                     if (element[i].name === 'checkbox') {
-                        answer = []
+                        answer = [];
                         for (let value of element[i].value) {
-                            console.log('value', value)
                             answer = answer.concat({ value, checked: false })
+                        }
+                        answer['element' + i] = { question: element[i].question, answer }
+                    } else if (element[i].name === 'fotoCheckbox') {
+                        answer = [];
+                        for (let value of element[i].value) {
+                            if (value !== null) {
+                                answer = answer.concat({ value: value.description, checked: false })
+                            } else {
+                                answer = answer.concat({ value: null })
+                            }
                         }
                         answer['element' + i] = { question: element[i].question, answer }
                     } else {
@@ -68,16 +64,28 @@ export default function reduce(state = initialState, action) {
             return { result }
         case SET_ANSWER:
             {
-                const { payload } = action;
-                const { elementIndex, position, answer } = payload;
+                const { elementIndex, position, answer, answerIndex } = action.payload;
                 const sectionIndex = firstIndex(elementIndex);
                 let sections = getSections(state);
                 sections = Object.assign({}, sections);
-                Object.keys(sections).map(key => {
-                    if (key === `section${sectionIndex}`) {
-                        sections[key].answer['element' + position].answer = answer;
-                    }
-                })
+                if (answerIndex === undefined) {
+                    Object.keys(sections).map(key => {
+                        if (key === `section${sectionIndex}`) {
+                            sections[key].answer['element' + position].answer = answer;
+                        }
+                    })
+                } else {
+                    Object.keys(sections).map(key => {
+                        if (key === `section${sectionIndex}`) {
+                            if (answerIndex === '99') {
+                                typeof answer === 'string' ? sections[key].answer['element' + position].answer[answerIndex].description = answer :
+                                    sections[key].answer['element' + position].answer[answerIndex].checked = answer;
+                            } else {
+                                sections[key].answer['element' + position].answer[answerIndex].checked = answer;
+                            }
+                        }
+                    })
+                }
                 const result = { title: state.result.title, answers: sections }
                 return { result }
             }

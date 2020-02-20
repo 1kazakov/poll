@@ -7,55 +7,42 @@ import * as resultSelectors from '../../../store/results/reducer';
 import * as resultActions from '../../../store/results/actions';
 
 class PreCheckbox extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            input: false,
-        }
-    }
+
     setAnswer = (evt) => {
-        // const { id, position, element, value } = this.props;
-        // let { answer } = element;
-        // answer[evt.target.name].checked = true;
-        // this.setState({ input: false });
-        // this.props.dispatch(resultActions.setAnswer({ elementIndex: id, position, answer: evt.target.value }));
-    }
-    setOther = (evt) => {
-        // const { id, position } = this.props;
-        // this.setState({ input: true });
-        // this.props.dispatch(resultActions.setAnswer({ elementIndex: id, position, answer: evt.target.value }));
+        const { id, position, element } = this.props;
+        let { answer } = element;
+        this.props.dispatch(resultActions.setAnswer({ elementIndex: id, position, answer: !answer[evt.target.name].checked, answerIndex: evt.target.name }));
     }
     setAnswerOther = (evt) => {
-        // const { id, position, value } = this.props;
-        // const result = {};
-        // for (let i = 0; i < value.length; i++) {
-        //     result[value[i]] = false
-        // }
-        // let answer = `other ${evt.target.value}`
-        // this.props.dispatch(resultActions.setAnswer({ elementIndex: id, position, answer }));
+        const { id, position, value } = this.props;
+        const result = {};
+        for (let i = 0; i < value.length; i++) {
+            result[value[i]] = false
+        }
+        let answer = evt.target.value;
+        this.props.dispatch(resultActions.setAnswer({ elementIndex: id, position, answer, answerIndex: evt.target.name }));
     }
     render() {
         const { value, element } = this.props;
-        console.log('element', element)
         let { answer } = element;
         let out = [];
         for (let i = 0; i < value.length; i++) {
-            //Необходимо посмотреть атрибуты name и value у радио инпутов
             if (value[i] !== null && value[i] !== undefined) {
                 if (i === 99) {
+                    const { description = '' } = answer[i];
                     out = out.concat(<div className="pre-checkbox__wrapper">
                         <label className="pre-checkbox__label">
-                            <input onChange={this.setOther} name={i} type="checkbox" value="other" className="pre-checkbox__input" />
+                            <input onChange={this.setAnswer} name={i} type="checkbox" value="other" className="pre-checkbox__input" />
                             <span className="pre-checkbox__checkbox"></span>
                             Свой вариант ответа
                         </label>
-                        {this.state.input ? <input onChange={this.setAnswerOther} type="text" placeholder="Введите свой вариант ответа" className="input" /> : null}
+                        {answer[i].checked ? <input name={i} onChange={this.setAnswerOther} value={description} type="text" placeholder="Введите свой вариант ответа" className="input" /> : null}
                     </div>)
                 } else {
                     out = out.concat(<label className="pre-checkbox__label">
                         <input
                             onChange={this.setAnswer}
-                            checked={answer === value[i]}
+                            checked={answer[i].checked}
                             name={i}
                             type="checkbox"
                             value={value[i]}
@@ -80,4 +67,4 @@ const mapStateToProps = (state, props) => {
     }
 }
 
-export default connect(mapStateToProps)(PreCheckbox);
+export default connect(mapStateToProps, null, null, { pure: false })(PreCheckbox);

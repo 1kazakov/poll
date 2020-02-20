@@ -1,9 +1,6 @@
 .pre-foro-radio {
     display: flex;
     flex-wrap: wrap;
-
-    /* justify-content: space-between; */
-    /* flex-direction: column; */
 }
 .pre-foto-radio__card {
     margin: 0 20px 20px 0;
@@ -53,8 +50,7 @@
 }
 
 .pre-foto-radio__wrapper-img {
-    /* position: absolute;
-    top: 50px; */
+
     width: 222px;
     height: 222px;
     display: flex;
@@ -66,5 +62,7 @@
 
 }
 .pre-foto-radio__img {
-    height: 100%;
+    object-fit: cover;
+    width: 222px;
+    height: 222px;
 }

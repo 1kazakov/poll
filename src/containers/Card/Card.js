@@ -14,7 +14,6 @@ class Card extends Component {
         this.setState({ menu: true });
     }
     onCloseMenu = (value) => {
-        console.log('state', this.state)
         this.setState({ menu: value });
     }
 

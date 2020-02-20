@@ -45,10 +45,12 @@ class Sections extends Component {
     }
     sectionDelete = (evt) => {
         evt.preventDefault();
+        const { index, position } = this.props;
+        this.props.dispatch(elementActions.deleteSection({ position, index }))
+
 
     }
     render() {
-        console.log('this.props', this.props)
         let { elements } = this.props;
         [elements] = elements;
         // elements.sort((a, b) => a.position - b.position)

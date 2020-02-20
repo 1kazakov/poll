@@ -8,9 +8,6 @@ import NewPoll from '../NewPoll/NewPoll';
 import * as elementActions from '../../store/elements/actions';
 
 class PollList extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
     onShowPopupNewPoll = () => {
         this.props.history.push('/entry');
         this.props.dispatch(elementActions.addPoll({ title: null, subtitle: null }));

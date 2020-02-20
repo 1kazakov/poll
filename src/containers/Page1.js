@@ -13,7 +13,6 @@ import Preview from './Preview/Preview';
 class Page1 extends Component {
 
     render() {
-        // console.log(this.props)
         return (
             <div className="Page1">
                 <Header onShowPopupNewPoll={this.onShowPopupNewPoll} />

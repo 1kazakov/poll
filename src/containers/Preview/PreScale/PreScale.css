@@ -1,0 +1,9 @@
+.pre-scale__wrapper-description {
+    display: flex;
+    justify-content: space-between;
+    color: #808080;
+}
+.pre-scale__description {
+    padding: 0;
+    margin: 0;
+}

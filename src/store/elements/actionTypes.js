@@ -1,5 +1,6 @@
 export const ELEMENT_ADD = 'elements/ADD';
 export const SECTION_ADD = 'elements/ADD_SECTION';
+export const SECTION_DELETE = 'element/DELETE_SECTION';
 export const SECTION_TRANSFER = 'elements/TRANSFER_SECTION';
 export const TITLE_SECTION = 'elements/TITLE_SECTION';
 export const ELEMENT_CHANGE = 'elements/CHANGE';

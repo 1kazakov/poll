@@ -1,6 +1,7 @@
 import {
     POLL_ADD,
     SECTION_ADD,
+    SECTION_DELETE,
     SECTION_TRANSFER,
     TITLE_SECTION,
     ELEMENT_ADD,
@@ -56,7 +57,6 @@ export const getSection = (state) => {
 //REDUCE
 
 export default function reduce(state = initialState, action) {
-    // console.log(state)
     switch (action.type) {
         case POLL_ADD:
             {
@@ -77,6 +77,18 @@ export default function reduce(state = initialState, action) {
                 return {
                     ...state,
                     elements: elements
+                }
+            }
+        case SECTION_DELETE:
+            {
+                const { index } = action.payload;
+                let sections = getSection(state);
+                sections = sections.filter(section => section[0].index !== index);
+                const sectionDelete = new Array({ index: null });
+                sections.push(sectionDelete);
+                return {
+                    ...state,
+                    elements: { ...state.elements, section: sections }
                 }
             }
         case SECTION_TRANSFER:
@@ -108,13 +120,11 @@ export default function reduce(state = initialState, action) {
                 }
                 sections = sections.concat(new Array(section));
                 sections.sort((a, b) => a[0].position - b[0].position);
-                console.log('sections', sections)
                 return { ...state, elements: { ...state.elements, section: sections } }
             }
         case TITLE_SECTION:
             {
                 let { index } = action.payload;
-                // let [element] = state.elements.section.filter(section => section[0].index === index);
                 let [element] = getElements(state, index);
                 element[0] = { ...element[0], ...action.payload };
                 let otherElements = state.elements.section.filter(section => section[0].index !== index)
@@ -163,7 +173,6 @@ export default function reduce(state = initialState, action) {
             {
                 const { position } = action.payload;
                 const index = firstIndex(action.payload.elementIndex);
-                // const elementIndex = secondIndex(action.payload.elementIndex);
                 let [element] = state.elements.section.filter(section => section[0].index === index);
                 element[position] = { ...element[position], ...action.payload };
                 let otherElements = state.elements.section.filter(section => section[0].index !== index);
@@ -177,24 +186,17 @@ export default function reduce(state = initialState, action) {
         case ELEMENT_ADD_OPTION:
             {
                 const index = firstIndex(action.payload.elementIndex);
-                // const elementIndex = secondIndex(action.payload.elementIndex);
                 const { optionIndex, position } = action.payload;
-                // let [element] = state.elements.section.filter(section => section[0].index === index);
-                let [element] = getElements(state, index)
-                console.log('element[position].value[+optionIndex]', element[position].value[+optionIndex])
+                let [element] = getElements(state, index);
                 if (action.payload.value !== null && action.payload.indexOption !== 99 && element[position].value[+optionIndex] === undefined) {
                     element[position].counter += 1;
                 }
-                //---------------------------------------------------------------
-                if (typeof action.payload.value !== 'object') {
+                if (typeof action.payload.value !== 'object' || action.payload.value === null) {
                     element[position].value[optionIndex] = action.payload.value;
                 } else {
-                    console.log('1111111111111111111111111111111111111111111')
-                    console.log('element[position].value[optionIndex]', element[position].value[optionIndex])
-                    element[position].value[optionIndex] = { ...element[position].value[optionIndex], ...action.payload.value }
+                    element[position].value[+optionIndex] = { ...element[position].value[+optionIndex], ...action.payload.value }
                 }
-                //---------------------------------------------------------------
-                // element[position].value[optionIndex] = action.payload.value;
+
                 let otherElements = state.elements.section.filter(section => section[0].index !== index);
                 otherElements.push(element);
                 otherElements.sort((a, b) => a[0].position - b[0].position);
@@ -285,4 +287,3 @@ export const getCounter = (state, position, elementIndex) => {
     const counter = element.counter;
     return counter;
 }
-// getElementByPosition = (state, position, indexSection)

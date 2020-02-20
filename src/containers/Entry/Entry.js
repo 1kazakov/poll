@@ -19,7 +19,6 @@ class Entry extends Component {
     addPoll = (evt) => {
         evt.preventDefault();
         const { title } = this.props;
-        // const { index } = this.props;
         if (title === null || title.trim() === '') {
             this.setState({ warning: <div className="warning">Введите название опроса</div> })
         } else {

@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import './NewPoll.css';
 
 class NewPoll extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
-    onClick = () => {
-        console.log(123123123123123123123123123123)
-    }
 
     render() {
         return (

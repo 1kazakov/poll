@@ -6,28 +6,25 @@ import * as elementActions from '../../../store/elements/actions';
 import * as elementSelectors from '../../../store/elements/reducer';
 
 class Radio extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
     setOptionRadio = (evt) => {
         evt.preventDefault();
         const { index, position } = this.props;
-        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: index, position: position, optionIndex: evt.target.name, value: evt.target.value }))
+        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: index, position, optionIndex: evt.target.name, value: evt.target.value }))
     }
     deleteInput = (evt) => {
         evt.preventDefault();
         const { index, position } = this.props;
-        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: index, position: position, optionIndex: evt.target.name, value: null }))
+        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: index, position, optionIndex: evt.target.name, value: null }))
     }
     addInput = (evt) => {
         evt.preventDefault();
         const { counter, index, position } = this.props;
-        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: index, position: position, value: '', optionIndex: counter }))
+        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: index, position, value: '', optionIndex: counter }))
     }
     addOther = (evt) => {
         evt.preventDefault();
         const { index, position } = this.props;
-        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: index, position: position, optionIndex: 99, value: 'other' }))
+        this.props.dispatch(elementActions.addOptionRadio({ elementIndex: index, position, optionIndex: 99, value: 'other' }))
     }
     render() {
         const { options } = this.props;
@@ -63,8 +60,6 @@ class Radio extends Component {
 
 const mapStateToProps = (state, props) => {
     return {
-        //Если убрать следующую строку то элемент не обновляется, не знаю почему!!! возможно потому что нет глубокой проверки пропсов
-        // state: state,
         options: elementSelectors.getOptions(state, props.index),
         counter: elementSelectors.getCounter(state, props.position, props.index),
     }

@@ -34,7 +34,7 @@ class PreRadio extends Component {
     }
     render() {
         const { value, name, id, element } = this.props;
-        let { answer } = element;
+        let { answer = '' } = element;
 
         let out = [];
         for (let i = 0; i < value.length; i++) {

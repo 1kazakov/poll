@@ -21,7 +21,7 @@ class PreCelendar extends Component {
             <div className="celendar">
                 <DataPicker
                     className="input celendar__input"
-                    selected={answer}
+                    selected={answer}//посмотреть, нужно ли менять формат даты?
                     locale={ru}
                     showYearDropdown
                     dateFormatCalendar="MMMM"

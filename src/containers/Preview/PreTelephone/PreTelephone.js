@@ -23,11 +23,6 @@ class PreTelephone extends Component {
                     onlyCountries={['ru', 'kz', 'ua', 'by']}
                     value={answer}
                     onChange={this.setAnswer}
-                //  inputProps={{
-                //      disableCountryCode: true,
-                //      countryCodeEditable: false,
-                //      disableAreaCodes: true,
-                //  }}
                 />
             </div>
         )

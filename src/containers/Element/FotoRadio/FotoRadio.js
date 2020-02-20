@@ -6,7 +6,6 @@ import * as elementActions from '../../../store/elements/actions';
 import * as elementSelectors from '../../../store/elements/reducer';
 
 class FotoRadio extends Component {
-    //Сделать обработку ошибок при загрузке файла
     constructor(props) {
         super(props);
         this.state = {
@@ -31,11 +30,13 @@ class FotoRadio extends Component {
     }
     setUrlImg = (evt) => {
         evt.preventDefault();
+        //Посмотреть нужен ли try catch
         try {
             const { index, position } = this.props;
             const { name } = evt.target;
             const optionIndex = Number(name.substr(3, 2));
             const file = this[name].current.files[0];
+            //Сделать проверку на тип файла что бы загрузать только картинки
             // if (file.type === 'image/jpeg' || file.type === 'image/png')
             console.log('file.type', file.type)
             let reader = new FileReader();
@@ -65,7 +66,7 @@ class FotoRadio extends Component {
     render() {
 
         const { options } = this.props;
-        //Создаю рефы для отслеживания инпутов (возможно костыль)
+        //рефы для отслеживания инпутов
         for (let i = 0; i < options.length; i++) {
             this['ref' + i] = React.createRef();
         }
@@ -81,7 +82,7 @@ class FotoRadio extends Component {
                         <button name={i} className="foto-radio__button--del button--del" onClick={this.deleteOption}></button>
                     </div>)
                 } else {
-                    out.push(<div className="foto-radio__wrapper foto-radio__wrapper--img" key={i}>
+                    out.push(<div className={`foto-radio__wrapper foto-radio__wrapper--img ${this.props.class}`} key={i}>
                         <input type="text" name={i} onChange={this.setOptionFoto} value={options[i].description} className="foto-radio__input foto-radio__input--img input" />
                         <div className="foto-radio__img-wrapper">
                             <img className="foto-radio__img" src={options[i].url} alt={options[i].description} />

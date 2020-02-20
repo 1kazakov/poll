@@ -2,6 +2,7 @@ import {
     POLL_ADD,
     ELEMENT_ADD,
     SECTION_ADD,
+    SECTION_DELETE,
     SECTION_TRANSFER,
     TITLE_SECTION,
     ELEMENT_CHANGE,
@@ -21,6 +22,12 @@ export const addSection = (section) => {
     return {
         type: SECTION_ADD,
         payload: new Array(section)
+    }
+}
+export const deleteSection = (section) => {
+    return {
+        type: SECTION_DELETE,
+        payload: section,
     }
 }
 

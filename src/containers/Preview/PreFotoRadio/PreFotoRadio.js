@@ -12,7 +12,8 @@ class PreFotoRadio extends Component {
         this.props.dispatch(resultAction.setAnswer({ elementIndex: id, position, answer: evt.target.value }))
     }
     render() {
-        const { value, name, id } = this.props;
+        const { value, name, id, element } = this.props;
+        let { answer } = element;
         let out = [];
         for (let i = 0; i < value.length; i++) {
             if (value[i] !== null && value[i] !== undefined) {
@@ -24,14 +25,13 @@ class PreFotoRadio extends Component {
                             <div className="pre-foto-radio__wrapper-img">
                                 <img className="pre-foto-radio__img" src={value[i].url} alt={value[i].description} />
                             </div>
-                            <input onChange={this.setAnswer} name={name + id} type="radio" value={value[i].description} className="pre-foro-radio__input" />
+                            <input checked={answer === value[i].description ? true : false} onChange={this.setAnswer} name={name + id} type="radio" value={value[i].description} className="pre-foro-radio__input" />
                             <span className="pre-foro-radio__radio"></span>
                             {value[i].description}
                         </label>
                     </div >
                 )
             }
-
         }
 
         return (

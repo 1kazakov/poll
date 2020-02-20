@@ -21,30 +21,28 @@ class Preview extends Component {
     constructor(props) {
         super(props);
         this.props.dispatch(resultActions.setResult(this.props.poll))
-
-    }
-    componentDidMount() {
-        // this.props.dispatch(resultActions.setResult(this.props.poll))
     }
     render() {
-        // console.log('props', this.props.getState())
+        //сделать задержку что бы store.result успевал появиться
 
         let option = new Map();
 
         const { poll } = this.props;
-        const {
-            section } = poll;
+        let { section } = poll;
+        section = section.filter(elements => elements[0].index !== null);
         let out = [];
+        let counter = 1;
         for (let elements of section) {
             let elementOut = [];
             for (let element of elements) {
+
                 if (element.index !== undefined) {
-                    let option = null;// eslint-disable-line
                     elementOut = elementOut.concat(<section className="preview__block preview__block--title">
-                        <div className="preview__label">Раздел {element.index + 1}  из {section.length}</div>
+                        <div className="preview__label">Раздел {counter}  из {section.length}</div>
                         <h3 className="preview__title">{element.title}</h3>
                         <p className="preview__subtitle">{element.subtitle}</p>
                     </section>)
+                    counter++
                 } else {
                     if (element.name === 'fullName') {
                         option = <PreFullName name={element.name} id={element.elementIndex} position={element.position} />
@@ -61,14 +59,13 @@ class Preview extends Component {
                     } else if (element.name === 'checkbox') {
                         option = <PreCheckbox value={element.value} name={element.name} id={element.elementIndex} position={element.position} />
                     } else if (element.name === 'scale') {
-                        option = <PreScale name={element.name} id={element.elementIndex} position={element.position} />
+                        option = <PreScale value={element.value} name={element.name} id={element.elementIndex} position={element.position} />
                     } else if (element.name === 'fotoRadio') {
                         option = <PreFotoRadio value={element.value} name={element.name} id={element.elementIndex} position={element.position} />
                     } else if (element.name === 'fotoCheckbox') {
                         option = <PreFotoCheckbox value={element.value} name={element.name} id={element.elementIndex} position={element.position} />
                     } else {
                         console.log('таких элементов нет')
-                        // option = <PreFullName name={element.name} id={element.elementIndex} />
                     }
                     elementOut = elementOut.concat(<section className="preview__block">
                         <h3 className="preview__title">{element.question}</h3>
@@ -80,12 +77,6 @@ class Preview extends Component {
             out = out.concat(...elementOut);
         }
 
-
-        // out = out.concat(<section className="entry"></section>)
-
-        console.log(poll)
-        console.log('out', out)
-
         return (
             <form>
                 {out}
@@ -95,9 +86,6 @@ class Preview extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('state', state)
-    // console.log('store', store)
-
     return {
         poll: elementSelectors.getPoll(state),
     }

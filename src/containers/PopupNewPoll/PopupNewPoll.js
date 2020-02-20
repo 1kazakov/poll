@@ -3,12 +3,8 @@ import './PopupNewPoll.css';
 import OutsideAlerter from '../OutsideAlerter/OutsideAlerter';
 
 export default class PopupNewPoll extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
     onAddNewPoll = (evt) => {
         evt.preventDefault();
-        console.log(222)
     }
     render() {
         return (<div className="b-popup">

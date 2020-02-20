@@ -13,7 +13,7 @@ class PreTextArea extends Component {
     }
     render() {
         const { element } = this.props;
-        const { answer } = element;
+        const { answer = '' } = element;
         return (
             <div className="pre-textarea">
                 <textarea value={answer} onChange={this.setAnswer} className="pre-textarea__input textarea"></textarea>

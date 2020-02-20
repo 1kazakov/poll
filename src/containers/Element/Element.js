@@ -23,7 +23,7 @@ class Element extends Component {
         } else if (elementName === 'fotoRadio' || elementName === 'fotoCheckbox') {
             this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [{ description: '', url: null }], counter: 1, position }))
         } else if (elementName === 'scale') {
-            this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [0, 10], position }))
+            this.props.dispatch(elementActions.changeElement({ name: elementName, elementIndex: index, value: [{ description: '', value: '0' }, { description: '', value: '10' }], position }))
         } else {
             this.props.dispatch(elementActions.changeElement({ name: evt.target.value, elementIndex: index, position }))
         }

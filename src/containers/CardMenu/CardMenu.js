@@ -4,12 +4,7 @@ import './CardMenu.css';
 import OutsideAlerter from '../OutsideAlerter/OutsideAlerter'
 
 export default class CardMenu extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
-
     onClickMenu = () => {
-        console.log(1)
     }
 
     render() {
